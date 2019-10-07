@@ -7,6 +7,12 @@
  */
 open ReactNative;
 
+
+module Navigation = {
+  [@react.component] [@bs.module "../node_modules/react-native-navigation/lib/dist/Navigation"]
+  external make: (_) => React.element = "default";
+};
+
 type reactNativeNewAppScreenColors = {
   .
   "primary": string,
@@ -23,21 +29,11 @@ external colors: reactNativeNewAppScreenColors = "Colors";
 [@bs.module "react-native/Libraries/Core/Devtools/openURLInBrowser"]
 external openURLInBrowser: string => unit = "default";
 
+
+
 module Header = {
   [@react.component] [@bs.module "react-native/Libraries/NewAppScreen"]
   external make: _ => React.element = "Header";
-};
-module ReloadInstructions = {
-  [@react.component] [@bs.module "react-native/Libraries/NewAppScreen"]
-  external make: _ => React.element = "ReloadInstructions";
-};
-module LearnMoreLinks = {
-  [@react.component] [@bs.module "react-native/Libraries/NewAppScreen"]
-  external make: _ => React.element = "LearnMoreLinks";
-};
-module DebugInstructions = {
-  [@react.component] [@bs.module "react-native/Libraries/NewAppScreen"]
-  external make: _ => React.element = "DebugInstructions";
 };
 
 /*
@@ -82,87 +78,18 @@ let styles =
 [@react.component]
 let app = () =>
   <>
+    <Navigation />
     <StatusBar barStyle=`darkContent />
     <SafeAreaView>
       <ScrollView
         contentInsetAdjustmentBehavior=`automatic style={styles##scrollView}>
         <Header />
-        //  {global.HermesInternal == null ? null : (
-        //    <View style={styles##engine}>
-        //      <Text style={styles##footer}>Engine: Hermes</Text>
-        //    </View>
-        //  )}
         <View style={styles##body}>
           <View style={styles##sectionContainer}>
             <Text style={styles##sectionTitle}>
               "Step One"->React.string
             </Text>
-            <Text style={styles##sectionDescription}>
-              "Edit "->React.string
-              <Text style={styles##highlight}>
-                "src/App.re"->React.string
-              </Text>
-              " to change this screen and then come back to see your edits."
-              ->React.string
-            </Text>
           </View>
-          <View style={styles##sectionContainer}>
-            <Text style={styles##sectionTitle}>
-              "See Your Changes"->React.string
-            </Text>
-            <Text style={styles##sectionDescription}>
-              <ReloadInstructions />
-            </Text>
-          </View>
-          <View style={styles##sectionContainer}>
-            <Text style={styles##sectionTitle}> "Debug"->React.string </Text>
-            <Text style={styles##sectionDescription}>
-              <DebugInstructions />
-            </Text>
-          </View>
-          <View style={styles##sectionContainer}>
-            <Text style={styles##sectionTitle}>
-              "Learn More"->React.string
-            </Text>
-            <Text style={styles##sectionDescription}>
-              "Read the docs to discover what to do next:"->React.string
-            </Text>
-          </View>
-          <View style={styles##sectionContainer}>
-            <Text style={styles##sectionDescription}>
-              <Text style={styles##highlight}>
-                "Reason React Native"->React.string
-              </Text>
-            </Text>
-            <TouchableOpacity
-              onPress={_ =>
-                openURLInBrowser(
-                  "https://reasonml-community.github.io/reason-react-native/en/docs/",
-                )
-              }>
-              <Text
-                style=Style.(
-                  style(
-                    ~marginTop=8.->dp,
-                    ~fontSize=18.,
-                    ~fontWeight=`_400,
-                    ~color=colors##primary,
-                    (),
-                  )
-                )>
-                "https://reasonml-community.github.io/\nreason-react-native/"
-                ->React.string
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles##sectionContainer}>
-            <Text style={styles##sectionDescription}>
-              <Text style={styles##highlight}>
-                "React Native"->React.string
-              </Text>
-            </Text>
-          </View>
-          <LearnMoreLinks />
         </View>
       </ScrollView>
     </SafeAreaView>
